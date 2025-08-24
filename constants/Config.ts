@@ -32,15 +32,15 @@ export const Config = {
   
   // Social Links
   SOCIAL_LINKS: {
-    GITHUB: 'https://github.com',
-    TWITTER: 'https://twitter.com',
-    WEBSITE: 'https://example.com',
+    GITHUB: '',
+    TWITTER: '',
+    WEBSITE: '',
   },
   
   // Support
-  SUPPORT_EMAIL: 'support@movix.app',
-  PRIVACY_POLICY: 'https://example.com/privacy',
-  TERMS_OF_SERVICE: 'https://example.com/terms',
+  SUPPORT_EMAIL: '',
+  PRIVACY_POLICY: '',
+  TERMS_OF_SERVICE: '',
 };
 
 // Feature Flags

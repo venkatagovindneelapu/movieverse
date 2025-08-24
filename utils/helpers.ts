@@ -118,10 +118,11 @@ export const truncateText = (text: string, maxLength: number): string => {
  * @returns Hex color string
  */
 export const generateRandomColor = (seed: string): string => {
-  const colors = [
-    '#6366F1', '#8B5CF6', '#EC4899', '#EF4444',
-    '#F59E0B', '#10B981', '#06B6D4', '#3B82F6'
-  ];
+  const colors: string[] = [];
+  
+  if (colors.length === 0) {
+    return '#6366F1'; // Default fallback color
+  }
   
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {

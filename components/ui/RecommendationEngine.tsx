@@ -69,28 +69,28 @@ export default function RecommendationEngine({
         title: 'Trending Now',
         icon: <TrendingUp size={16} color={Colors.primary} />,
         movies: trending,
-        algorithm: 'Based on current popularity and user engagement',
+        algorithm: 'Based on current popularity metrics',
       },
       {
         id: 'top_rated',
         title: 'Highly Rated',
         icon: <Star size={16} color={Colors.warning} />,
         movies: topRated,
-        algorithm: 'Movies with ratings above 7.5/10',
+        algorithm: 'Movies with high user ratings',
       },
       {
         id: 'recent',
         title: 'Recent Releases',
         icon: <Clock size={16} color={Colors.info} />,
         movies: recent,
-        algorithm: 'Movies released in the last 3 years',
+        algorithm: 'Recently released movies',
       },
       {
         id: 'personalized',
         title: 'For You',
         icon: <Sparkles size={16} color={Colors.accent.romance} />,
         movies: personalized,
-        algorithm: 'Personalized recommendations based on your preferences',
+        algorithm: 'Personalized recommendations',
       },
     ].filter(category => category.movies.length > 0);
 
