@@ -254,6 +254,106 @@ export class MovieService {
   static getProfileUrl(path: string | null): string {
     return this.getImageUrl(path, 'w300');
   }
+
+  // =============================================================================
+  // USER ACCOUNT METHODS (TMDB Account Integration)
+  // =============================================================================
+
+  /**
+   * Fetches user's favorite movies from TMDB account
+   * @param accountId - TMDB account ID
+   * @param sessionId - TMDB session ID
+   * @param page - Page number for pagination (default: 1)
+   * @returns Promise with paginated favorite movies
+   */
+  static async getFavoriteMovies(accountId: string, sessionId: string, page: number = 1): Promise<ApiResponse<Movie>> {
+    return this.fetchFromAPI(`/account/${accountId}/favorite/movies?language=en-US&page=${page}&session_id=${sessionId}`);
+  }
+
+  /**
+   * Fetches user's watchlist movies from TMDB account
+   * @param accountId - TMDB account ID
+   * @param sessionId - TMDB session ID
+   * @param page - Page number for pagination (default: 1)
+   * @returns Promise with paginated watchlist movies
+   */
+  static async getWatchlistMovies(accountId: string, sessionId: string, page: number = 1): Promise<ApiResponse<Movie>> {
+    return this.fetchFromAPI(`/account/${accountId}/watchlist/movies?language=en-US&page=${page}&session_id=${sessionId}`);
+  }
+
+  /**
+   * Fetches user's rated movies from TMDB account
+   * @param accountId - TMDB account ID
+   * @param sessionId - TMDB session ID
+   * @param page - Page number for pagination (default: 1)
+   * @returns Promise with paginated rated movies
+   */
+  static async getRatedMovies(accountId: string, sessionId: string, page: number = 1): Promise<ApiResponse<Movie>> {
+    return this.fetchFromAPI(`/account/${accountId}/rated/movies?language=en-US&page=${page}&session_id=${sessionId}`);
+  }
+
+  /**
+   * Adds or removes a movie from user's favorites
+   * @param accountId - TMDB account ID
+   * @param sessionId - TMDB session ID
+   * @param movieId - The TMDB movie ID
+   * @param favorite - True to add to favorites, false to remove
+   * @returns Promise with operation result
+   */
+  static async addToFavorites(accountId: string, sessionId: string, movieId: number, favorite: boolean): Promise<any> {
+    return this.fetchFromAPI(`/account/${accountId}/favorite?session_id=${sessionId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        media_type: 'movie',
+        media_id: movieId,
+        favorite: favorite
+      })
+    });
+  }
+
+  /**
+   * Adds or removes a movie from user's watchlist
+   * @param accountId - TMDB account ID
+   * @param sessionId - TMDB session ID
+   * @param movieId - The TMDB movie ID
+   * @param watchlist - True to add to watchlist, false to remove
+   * @returns Promise with operation result
+   */
+  static async addToWatchlist(accountId: string, sessionId: string, movieId: number, watchlist: boolean): Promise<any> {
+    return this.fetchFromAPI(`/account/${accountId}/watchlist?session_id=${sessionId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        media_type: 'movie',
+        media_id: movieId,
+        watchlist: watchlist
+      })
+    });
+  }
+
+  /**
+   * Rates a movie on TMDB
+   * @param movieId - The TMDB movie ID
+   * @param sessionId - TMDB session ID
+   * @param rating - Rating value (0.5 to 10.0)
+   * @returns Promise with rating result
+   */
+  static async rateMovie(movieId: number, sessionId: string, rating: number): Promise<any> {
+    return this.fetchFromAPI(`/movie/${movieId}/rating?session_id=${sessionId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        value: rating
+      })
+    });
+  }
 }
 
 /**
