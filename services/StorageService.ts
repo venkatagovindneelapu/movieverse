@@ -28,15 +28,15 @@ export class StorageService {
     try {
       try {
         // Attempt to sync favorites from TMDB
-        const tmdbFavorites = await MovieService.getFavoriteMovies();
+        const tmdbFavorites = await MovieService.getFavoriteMovies(Config.TMDB_ACCOUNT_ID, '');
         await AsyncStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(tmdbFavorites.results));
         
         // Attempt to sync watchlist from TMDB
-        const tmdbWatchlist = await MovieService.getWatchlistMovies();
+        const tmdbWatchlist = await MovieService.getWatchlistMovies(Config.TMDB_ACCOUNT_ID, '');
         await AsyncStorage.setItem(STORAGE_KEYS.WATCHLIST, JSON.stringify(tmdbWatchlist.results));
         
         // Attempt to sync ratings from TMDB
-        const tmdbRated = await MovieService.getRatedMovies();
+        const tmdbRated = await MovieService.getRatedMovies(Config.TMDB_ACCOUNT_ID, '');
         await AsyncStorage.setItem(STORAGE_KEYS.RATINGS, JSON.stringify(tmdbRated.results));
         
         // Mark sync as successful
@@ -95,7 +95,7 @@ export class StorageService {
         
         // Attempt to sync with TMDB (may fail without proper authentication)
         try {
-          await MovieService.addToFavorites(movie.id, true);
+          await MovieService.addToFavorites(Config.TMDB_ACCOUNT_ID, '', movie.id, true);
         } catch (error) {
           console.warn('Failed to sync favorite with TMDB:', error);
         }
@@ -118,7 +118,7 @@ export class StorageService {
       
       // Attempt to sync with TMDB
       try {
-        await MovieService.addToFavorites(movieId, false);
+        await MovieService.addToFavorites(Config.TMDB_ACCOUNT_ID, '', movieId, false);
       } catch (error) {
         console.warn('Failed to sync favorite removal with TMDB:', error);
       }
@@ -198,7 +198,7 @@ export class StorageService {
         
         // Attempt to sync with TMDB
         try {
-          await MovieService.addToWatchlist(movie.id, true);
+          await MovieService.addToWatchlist(Config.TMDB_ACCOUNT_ID, '', movie.id, true);
         } catch (error) {
           console.warn('Failed to sync watchlist with TMDB:', error);
         }
@@ -221,7 +221,7 @@ export class StorageService {
       
       // Attempt to sync with TMDB
       try {
-        await MovieService.addToWatchlist(movieId, false);
+        await MovieService.addToWatchlist(Config.TMDB_ACCOUNT_ID, '', movieId, false);
       } catch (error) {
         console.warn('Failed to sync watchlist removal with TMDB:', error);
       }
@@ -277,7 +277,7 @@ export class StorageService {
       
       // Attempt to sync with TMDB
       try {
-        await MovieService.rateMovie(movieId, rating);
+        await MovieService.rateMovie(Config.TMDB_ACCOUNT_ID, '', movieId, rating);
       } catch (error) {
         console.warn('Failed to sync rating with TMDB:', error);
       }
