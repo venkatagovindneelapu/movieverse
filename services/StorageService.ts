@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Movie } from '@/types/Movie';
 import { MovieService } from './MovieService';
+import { Config } from '@/constants/Config';
 
 // Storage keys for AsyncStorage
 const STORAGE_KEYS = {
