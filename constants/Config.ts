@@ -7,7 +7,7 @@ export const Config = {
   TMDB_ACCOUNT_ID: '22243490',
   
   // App Settings
-  APP_NAME: 'MoviX',
+  APP_NAME: 'MovieVerse',
   APP_VERSION: '1.0.0',
   
   // Pagination
