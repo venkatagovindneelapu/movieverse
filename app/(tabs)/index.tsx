@@ -95,7 +95,7 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       {/* Netflix-style Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>/movieverse</Text>
+        <Text style={styles.headerTitle}>*movieverse</Text>
       </View>
 
       <ScrollView
